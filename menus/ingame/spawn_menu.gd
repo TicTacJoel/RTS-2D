@@ -1,14 +1,24 @@
-extends Node2D
+extends CanvasLayer
 
-@onready var unit = preload("res://entities/player/unit.tscn")
+@onready var unit = get_parent().unit
+@onready var spawn_point = get_parent().spawn_point.global_position
+# TODO: find some cleaner way of doing this
+@onready var world_path = get_tree().get_root().get_node("World")
+@onready var units_container_path = get_tree().get_root().get_node("World/Units")
+
+#------------------------------------------------------------------------------|
+func spawn_unit() -> void:
+	var unitContainer = units_container_path
+	var unitInstance = unit.instantiate()
+	unitInstance.position = spawn_point
+	unitContainer.add_child(unitInstance)
+	world_path.get_units()
 
 #------------------------------------------------------------------------------|
 func _on_confirm_btn_pressed() -> void:
-	var unitContainer = get_tree().get_root().get_node("World/Units")
-	var unitInstance = unit.instantiate()
-	unitInstance.position = Vector2(200, 200)
-	unitContainer.add_child(unitInstance)
+	spawn_unit()
 
 #------------------------------------------------------------------------------|
 func _on_cancel_btn_pressed() -> void:
-	pass # Replace with function body.
+	visible = false
+	get_parent().selected = false

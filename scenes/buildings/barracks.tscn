@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://7tyfc6rwmd61"]
+[gd_scene load_steps=7 format=3 uid="uid://7tyfc6rwmd61"]
 
 [ext_resource type="Texture2D" uid="uid://dv430qpoqgm1i" path="res://assets/buildings/Barracks.png" id="1_dd4aj"]
 [ext_resource type="Script" path="res://scenes/buildings/barracks.gd" id="1_vjkyq"]
+[ext_resource type="PackedScene" uid="uid://blwrkk68b82bg" path="res://entities/player/unit.tscn" id="2_5sfd4"]
+[ext_resource type="PackedScene" uid="uid://6xt5qfj0e564" path="res://menus/ingame/spawn_menu.tscn" id="3_51ad0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6qe6h"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -15,8 +17,11 @@ border_blend = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fg47x"]
 size = Vector2(28, 21)
 
-[node name="Barracks" type="StaticBody2D"]
+[node name="Barracks" type="StaticBody2D" node_paths=PackedStringArray("spawn_point")]
+input_pickable = true
 script = ExtResource("1_vjkyq")
+unit = ExtResource("2_5sfd4")
+spawn_point = NodePath("SpawnPoint")
 
 [node name="Selected" type="Panel" parent="."]
 visible = false
@@ -24,6 +29,7 @@ offset_left = -18.0
 offset_top = -22.0
 offset_right = 18.0
 offset_bottom = 2.0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_6qe6h")
 
 [node name="Barracks" type="Sprite2D" parent="."]
@@ -39,3 +45,8 @@ shape = SubResource("RectangleShape2D_fg47x")
 
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2(0, 5)
+
+[node name="SpawnMenu" parent="." instance=ExtResource("3_51ad0")]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
