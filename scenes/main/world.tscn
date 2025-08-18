@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5m2m0210d0vw"]
+
+[ext_resource type="Script" path="res://ui/camera.gd" id="1_nuo4p"]
+[ext_resource type="Script" path="res://scenes/main/world.gd" id="1_w0egm"]
+[ext_resource type="PackedScene" uid="uid://blwrkk68b82bg" path="res://entities/player/unit.tscn" id="2_acy6l"]
+[ext_resource type="Texture2D" uid="uid://bse3ca77h5goc" path="res://assets/environment/Grass.png" id="2_d6tsr"]
+[ext_resource type="PackedScene" uid="uid://caqsjuxt8bp3g" path="res://scenes/objects/tree.tscn" id="4_677wc"]
+[ext_resource type="PackedScene" uid="uid://bu0p4rcdn5fv3" path="res://ui/ui.tscn" id="5_kfj5j"]
+[ext_resource type="PackedScene" uid="uid://7tyfc6rwmd61" path="res://scenes/buildings/barracks.tscn" id="7_6h63t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c8r3"]
+atlas = ExtResource("2_d6tsr")
+region = Rect2(32, 0, 16, 16)
+
+[node name="World" type="Node2D"]
+y_sort_enabled = true
+script = ExtResource("1_w0egm")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 582.0
+offset_bottom = 335.0
+texture = SubResource("AtlasTexture_5c8r3")
+stretch_mode = 1
+
+[node name="Camera" type="Camera2D" parent="."]
+script = ExtResource("1_nuo4p")
+
+[node name="Units" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Unit" parent="Units" instance=ExtResource("2_acy6l")]
+position = Vector2(165, 97)
+
+[node name="Unit2" parent="Units" instance=ExtResource("2_acy6l")]
+position = Vector2(239, 97)
+
+[node name="Unit3" parent="Units" instance=ExtResource("2_acy6l")]
+position = Vector2(202, 129)
+
+[node name="Unit4" parent="Units" instance=ExtResource("2_acy6l")]
+position = Vector2(132, 151)
+
+[node name="Unit5" parent="Units" instance=ExtResource("2_acy6l")]
+position = Vector2(242, 158)
+
+[node name="Objects" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Tree" parent="Objects" instance=ExtResource("4_677wc")]
+position = Vector2(107, 101)
+
+[node name="UI" parent="." instance=ExtResource("5_kfj5j")]
+
+[node name="Buildings" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Barracks" parent="Buildings" instance=ExtResource("7_6h63t")]
+position = Vector2(209, 73)
