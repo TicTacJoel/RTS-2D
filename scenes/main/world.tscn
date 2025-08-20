@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5m2m0210d0vw"]
+[gd_scene load_steps=10 format=3 uid="uid://b5m2m0210d0vw"]
 
 [ext_resource type="Script" path="res://ui/camera.gd" id="1_nuo4p"]
 [ext_resource type="Script" path="res://scenes/main/world.gd" id="1_w0egm"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://caqsjuxt8bp3g" path="res://scenes/objects/tree.tscn" id="4_677wc"]
 [ext_resource type="PackedScene" uid="uid://bu0p4rcdn5fv3" path="res://ui/ui.tscn" id="5_kfj5j"]
 [ext_resource type="PackedScene" uid="uid://7tyfc6rwmd61" path="res://scenes/buildings/barracks.tscn" id="7_6h63t"]
+[ext_resource type="PackedScene" uid="uid://0mo13qfbnj27" path="res://scenes/buildings/gold_mine.tscn" id="8_6yugb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5c8r3"]
 atlas = ExtResource("2_d6tsr")
@@ -23,31 +24,33 @@ texture = SubResource("AtlasTexture_5c8r3")
 stretch_mode = 1
 
 [node name="Camera" type="Camera2D" parent="."]
+limit_left = 0
+limit_top = 0
 script = ExtResource("1_nuo4p")
 
 [node name="Units" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Unit" parent="Units" instance=ExtResource("2_acy6l")]
-position = Vector2(165, 97)
+position = Vector2(286, 150)
 
 [node name="Unit2" parent="Units" instance=ExtResource("2_acy6l")]
-position = Vector2(239, 97)
+position = Vector2(360, 150)
 
 [node name="Unit3" parent="Units" instance=ExtResource("2_acy6l")]
-position = Vector2(202, 129)
+position = Vector2(323, 182)
 
 [node name="Unit4" parent="Units" instance=ExtResource("2_acy6l")]
-position = Vector2(132, 151)
+position = Vector2(253, 204)
 
 [node name="Unit5" parent="Units" instance=ExtResource("2_acy6l")]
-position = Vector2(242, 158)
+position = Vector2(363, 211)
 
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Tree" parent="Objects" instance=ExtResource("4_677wc")]
-position = Vector2(107, 101)
+position = Vector2(150, 266)
 
 [node name="UI" parent="." instance=ExtResource("5_kfj5j")]
 
@@ -55,4 +58,7 @@ position = Vector2(107, 101)
 y_sort_enabled = true
 
 [node name="Barracks" parent="Buildings" instance=ExtResource("7_6h63t")]
-position = Vector2(209, 73)
+position = Vector2(274, 275)
+
+[node name="GoldMine" parent="Buildings" instance=ExtResource("8_6yugb")]
+position = Vector2(195, 171)

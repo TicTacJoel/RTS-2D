@@ -26,9 +26,7 @@ func _input(event: InputEvent) -> void:
 #------------------------------------------------------------------------------|
 func _on_mouse_entered() -> void:
 	mouseEntered = true
-	print("mouse entered")
 
 #------------------------------------------------------------------------------|
 func _on_mouse_exited() -> void:
 	mouseEntered = false
-	print("mouse exited")

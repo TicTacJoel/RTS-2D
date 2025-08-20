@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://0mo13qfbnj27"]
+
+[ext_resource type="Script" path="res://scenes/buildings/gold_mine.gd" id="1_3xlpc"]
+[ext_resource type="Texture2D" uid="uid://ydfk4co3rxkg" path="res://assets/buildings/Resources.png" id="1_yvuek"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a7qux"]
+size = Vector2(14, 10)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gxa3h"]
+bg_color = Color(1, 0.349573, 0.210659, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxcyf"]
+bg_color = Color(0, 0.724298, 0.236324, 1)
+
+[node name="GoldMine" type="StaticBody2D"]
+y_sort_enabled = true
+scale = Vector2(2, 2)
+script = ExtResource("1_3xlpc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("1_yvuek")
+hframes = 3
+vframes = 5
+frame = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_a7qux")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -8.0
+offset_top = -19.0
+offset_right = 8.0
+offset_bottom = -17.0
+theme_override_styles/background = SubResource("StyleBoxFlat_gxa3h")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dxcyf")
+value = 50.0
+show_percentage = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
