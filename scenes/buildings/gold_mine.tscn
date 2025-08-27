@@ -12,7 +12,7 @@ bg_color = Color(1, 0.349573, 0.210659, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxcyf"]
 bg_color = Color(0, 0.724298, 0.236324, 1)
 
-[node name="GoldMine" type="StaticBody2D"]
+[node name="GoldMine" type="StaticBody2D" groups=["building"]]
 y_sort_enabled = true
 scale = Vector2(2, 2)
 script = ExtResource("1_3xlpc")

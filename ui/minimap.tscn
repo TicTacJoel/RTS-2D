@@ -1,0 +1,66 @@
+[gd_scene load_steps=6 format=3 uid="uid://kkqdyb8c7vg7"]
+
+[ext_resource type="Script" path="res://ui/minimap_subviewport.gd" id="1_8085l"]
+[ext_resource type="Script" path="res://ui/minimap.gd" id="1_ah4y4"]
+[ext_resource type="Texture2D" uid="uid://bse3ca77h5goc" path="res://assets/environment/Grass.png" id="1_eyrxl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hba63"]
+bg_color = Color(0, 0.327926, 0.54064, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5c8r3"]
+atlas = ExtResource("1_eyrxl")
+region = Rect2(32, 0, 16, 16)
+
+[node name="Minimap" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ah4y4")
+
+[node name="BG" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 170.0
+offset_bottom = 170.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hba63")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 25.0
+offset_right = 305.0
+offset_bottom = 305.0
+scale = Vector2(0.5, 0.5)
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(280, 280)
+render_target_update_mode = 4
+script = ExtResource("1_8085l")
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport"]
+offset_right = 582.0
+offset_bottom = 335.0
+scale = Vector2(2, 2)
+texture = SubResource("AtlasTexture_5c8r3")
+stretch_mode = 1
+
+[node name="Camera" type="Camera2D" parent="SubViewportContainer/SubViewport"]
+
+[node name="Units" type="Node2D" parent="SubViewportContainer/SubViewport"]
+y_sort_enabled = true
+
+[node name="Buildings" type="Node2D" parent="SubViewportContainer/SubViewport"]

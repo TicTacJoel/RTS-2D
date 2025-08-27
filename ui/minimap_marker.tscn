@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpdhyu8jtb2v"]
+
+[ext_resource type="Texture2D" uid="uid://b2ceyjlad6cso" path="res://assets/objects/Square16x16.png" id="1_10cko"]
+[ext_resource type="Script" path="res://ui/minimap_marker.gd" id="2_vmy2i"]
+
+[node name="MinimapMarker" type="Sprite2D"]
+modulate = Color(0.714936, 0, 0.173755, 1)
+texture = ExtResource("1_10cko")
+script = ExtResource("2_vmy2i")

@@ -9,7 +9,13 @@ extends StaticBody2D
 var mouseEntered = false
 var selected = false
 
-#signal spawnUnit
+signal update_location
+signal destroyed
+
+func _ready() -> void:
+	
+	await get_tree().create_timer(1.0).timeout
+	update_location.emit(global_position)
 
 #------------------------------------------------------------------------------|
 func _process(delta: float) -> void:

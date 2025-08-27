@@ -15,7 +15,7 @@ func show_value(value, crit):
 	# Animate Position of Label
 	tween.tween_property(self, "position", position + movement, duration)
 	
-	# Animate Position of Label
+	# Animate Color of Label
 	tween.tween_property(self, "modulate:a", 0.0, duration)
 	
 	#if crit:

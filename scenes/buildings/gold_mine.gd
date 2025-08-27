@@ -9,9 +9,15 @@ var total_time = 50
 var current_time
 var gold_increase: int = 10
 
+signal update_location
+signal destroyed
+
 #------------------------------------------------------------------------------|
 func _ready() -> void:
 	reset()
+	
+	await get_tree().create_timer(1.0).timeout
+	update_location.emit(global_position)
 
 #------------------------------------------------------------------------------|
 func _process(delta: float) -> void:

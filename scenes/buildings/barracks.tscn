@@ -17,7 +17,7 @@ border_blend = true
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fg47x"]
 size = Vector2(28, 21)
 
-[node name="Barracks" type="StaticBody2D" node_paths=PackedStringArray("spawn_point")]
+[node name="Barracks" type="StaticBody2D" node_paths=PackedStringArray("spawn_point") groups=["building"]]
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_vjkyq")
