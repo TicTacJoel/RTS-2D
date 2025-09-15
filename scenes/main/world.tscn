@@ -1,11 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b5m2m0210d0vw"]
+[gd_scene load_steps=10 format=3 uid="uid://b5m2m0210d0vw"]
 
 [ext_resource type="Script" path="res://ui/camera.gd" id="1_nuo4p"]
 [ext_resource type="Script" path="res://scenes/main/world.gd" id="1_w0egm"]
 [ext_resource type="PackedScene" uid="uid://blwrkk68b82bg" path="res://entities/player/unit.tscn" id="2_acy6l"]
 [ext_resource type="Texture2D" uid="uid://bse3ca77h5goc" path="res://assets/environment/Grass.png" id="2_d6tsr"]
 [ext_resource type="PackedScene" uid="uid://d3b2tcke5u8gr" path="res://scenes/main/map_1.tscn" id="3_q3ddq"]
-[ext_resource type="PackedScene" uid="uid://caqsjuxt8bp3g" path="res://scenes/objects/tree.tscn" id="4_677wc"]
 [ext_resource type="PackedScene" uid="uid://bu0p4rcdn5fv3" path="res://ui/ui.tscn" id="5_kfj5j"]
 [ext_resource type="PackedScene" uid="uid://7tyfc6rwmd61" path="res://scenes/buildings/barracks.tscn" id="7_6h63t"]
 [ext_resource type="PackedScene" uid="uid://0mo13qfbnj27" path="res://scenes/buildings/gold_mine.tscn" id="8_6yugb"]
@@ -50,9 +49,6 @@ position = Vector2(363, 211)
 
 [node name="Objects" type="Node2D" parent="."]
 y_sort_enabled = true
-
-[node name="Tree" parent="Objects" instance=ExtResource("4_677wc")]
-position = Vector2(150, 266)
 
 [node name="Buildings" type="Node2D" parent="."]
 y_sort_enabled = true

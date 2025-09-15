@@ -19,6 +19,7 @@ corner_radius_bottom_left = 2
 script = ExtResource("1_mkvnc")
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 theme_override_styles/panel = SubResource("StyleBoxFlat_8sg6c")
 
 [node name="WoodLabel" type="Label" parent="."]
@@ -26,5 +27,11 @@ offset_left = 942.0
 offset_right = 987.0
 offset_bottom = 23.0
 text = "Wood: 999"
+
+[node name="GoldLabel" type="Label" parent="."]
+offset_left = 1064.0
+offset_right = 1136.0
+offset_bottom = 23.0
+text = "Gold: 999"
 
 [node name="Minimap" parent="." instance=ExtResource("2_dydyf")]

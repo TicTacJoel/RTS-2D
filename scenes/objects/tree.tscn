@@ -47,6 +47,10 @@ show_percentage = false
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="."]
+position = Vector2(0, -1.5)
+radius = 8.0
+
 [connection signal="body_entered" from="WorkArea" to="." method="_on_work_area_body_entered"]
 [connection signal="body_exited" from="WorkArea" to="." method="_on_work_area_body_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

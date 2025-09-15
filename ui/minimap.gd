@@ -8,14 +8,14 @@ extends Control
 var zoom_factor = Global.minimap_zoom_factor
 
 #------------------------------------------------------------------------------|
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	# TODO: find a better solution
 	var camera_path = get_tree().get_root().get_node("World/Camera")
 	camera.position = camera_path.position / zoom_factor
 	camera.zoom = camera_path.zoom
 	
-	# TODO: is this efficient?
-	set_markers()
+	# TODO: is this efficient? -> NO
+	#set_markers()
 
 #------------------------------------------------------------------------------|
 func set_markers():

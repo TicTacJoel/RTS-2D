@@ -1,12 +1,14 @@
 extends CanvasLayer
 
 @onready var wood_label: Label = $WoodLabel
+@onready var gold_label: Label = $GoldLabel
 
 func _process(_delta: float) -> void:
 	wood_label.text = "Wood: " + str(Global.Wood)
+	gold_label.text = "Gold: " + str(Global.Gold)
 
 ##-----------------------------------------------------------------------------/
-func set_tower_preview(tower_type, mouse_position):
+func set_tower_preview(tower_type, mouse_position) -> void:
 	pass
 	# TODO: some changes
 	#var drag_tower = load("res://Scenes/Turrets/" + tower_type + ".tscn").instantiate()

@@ -20,7 +20,7 @@ func _ready() -> void:
 	update_location.emit(global_position)
 
 #------------------------------------------------------------------------------|
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if current_time >= total_time:
 		gold_collected()
 		reset()

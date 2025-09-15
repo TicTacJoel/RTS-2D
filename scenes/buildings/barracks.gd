@@ -18,7 +18,7 @@ func _ready() -> void:
 	update_location.emit(global_position)
 
 #------------------------------------------------------------------------------|
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	selected_box.visible = selected
 
 #------------------------------------------------------------------------------|
@@ -32,7 +32,9 @@ func _input(event: InputEvent) -> void:
 #------------------------------------------------------------------------------|
 func _on_mouse_entered() -> void:
 	mouseEntered = true
+	print("MOUSE ENTERED")
 
 #------------------------------------------------------------------------------|
 func _on_mouse_exited() -> void:
 	mouseEntered = false
+	print("MOUSE EXITED")
