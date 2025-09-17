@@ -1,41 +1,38 @@
 extends CanvasLayer
 
-@onready var wood_label: Label = $WoodLabel
-@onready var gold_label: Label = $GoldLabel
+@onready var wood_label: Label = $HUD/WoodLabel
+@onready var gold_label: Label = $HUD/GoldLabel
 
+##-----------------------------------------------------------------------------/
 func _process(_delta: float) -> void:
 	wood_label.text = "Wood: " + str(Global.Wood)
 	gold_label.text = "Gold: " + str(Global.Gold)
 
 ##-----------------------------------------------------------------------------/
-func set_tower_preview(tower_type, mouse_position) -> void:
-	pass
-	# TODO: some changes
-	#var drag_tower = load("res://Scenes/Turrets/" + tower_type + ".tscn").instantiate()
-	#drag_tower.set_name("DragTower")
-	#drag_tower.modulate = Color("ad54ff3c")
-#
-	#var range_texture = Sprite2D.new()
-	#range_texture.position = Vector2(0, 0)
-	#var scaling = GameData.tower_data[tower_type]["range"] / 600.0
-	#range_texture.scale = Vector2(scaling, scaling)
-	#var texture = load("res://Assets/UI/range_overlay.png")
-	#range_texture.texture = texture
-	#range_texture.modulate = Color("ad54ff3c")
-#
-	#var control = Control.new()
-	#control.add_child(drag_tower, true)
-	#control.add_child(range_texture, true)
-	#control.position = mouse_position
-	#control.set_name("TowerPreview")
-	#add_child(control, true)
-	#move_child(get_node("TowerPreview"), 0)
+func set_building_preview(building_type, mouse_position) -> void:
+	print("building type: ", building_type)
+	var drag_tower = load("res://scenes/buildings/" + building_type + ".tscn").instantiate()
+	drag_tower.set_name("DragBuilding")
+	drag_tower.modulate = Global.COLORS.green
+
+	var control = Control.new()
+	control.add_child(drag_tower, true)
+	control.position = mouse_position
+	control.set_name("BuildingPreview")
+	add_child(control, true)
+	move_child(get_node("BuildingPreview"), 0)
 
 ##-----------------------------------------------------------------------------/
-func update_tower_preview(new_position, color):
-	pass
-	# TODO: some changes
-	#get_node("TowerPreview").position = new_position
-	#if get_node("TowerPreview/DragTower").modulate != Color(color):
-		#get_node("TowerPreview/DragTower").modulate = Color(color)
-		#get_node("TowerPreview/Sprite2D").modulate = Color(color)
+func update_building_preview(new_position, color):
+	get_node("BuildingPreview").position = new_position
+	if get_node("BuildingPreview/DragBuilding").modulate != Color(color):
+		get_node("BuildingPreview/DragBuilding").modulate = Color(color)
+		#get_node("BuildingPreview/Sprite2D").modulate = Color(color)
+
+##-----------------------------------------------------------------------------/
+func _on_barracks_mouse_entered() -> void:
+	print("MOUSE ENTERED")
+
+##-----------------------------------------------------------------------------/
+func _on_barracks_mouse_exited() -> void:
+	print("MOUSE EXITED")

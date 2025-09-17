@@ -9,6 +9,10 @@ var total_time = 50
 var current_time
 var gold_increase: int = 10
 
+# Building
+var type
+var build = false
+
 signal update_location
 signal destroyed
 

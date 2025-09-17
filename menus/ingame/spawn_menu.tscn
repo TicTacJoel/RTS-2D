@@ -11,27 +11,35 @@ region = Rect2(160, 0, 32, 32)
 visible = false
 script = ExtResource("1_xyuus")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="HUD"]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -265.0
-offset_top = -144.0
-offset_right = 265.0
-offset_bottom = -18.0
+offset_left = 291.0
+offset_top = 464.0
+offset_right = 821.0
+offset_bottom = 590.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="HUD"]
 offset_left = 325.0
 offset_top = 518.0
 offset_right = 393.0
 offset_bottom = 541.0
 text = "Barracks"
 
-[node name="ConfirmBtn" type="Button" parent="."]
+[node name="ConfirmBtn" type="Button" parent="HUD"]
 offset_left = 327.0
 offset_top = 547.0
 offset_right = 425.0
@@ -39,12 +47,12 @@ offset_bottom = 587.0
 text = "Soldier"
 icon = SubResource("AtlasTexture_80obs")
 
-[node name="CancelBtn" type="Button" parent="."]
+[node name="CancelBtn" type="Button" parent="HUD"]
 offset_left = 813.0
 offset_top = 511.0
 offset_right = 831.0
 offset_bottom = 542.0
 text = "X"
 
-[connection signal="pressed" from="ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
-[connection signal="pressed" from="CancelBtn" to="." method="_on_cancel_btn_pressed"]
+[connection signal="pressed" from="HUD/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
+[connection signal="pressed" from="HUD/CancelBtn" to="." method="_on_cancel_btn_pressed"]

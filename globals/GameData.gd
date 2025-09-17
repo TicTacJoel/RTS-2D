@@ -2,20 +2,21 @@ extends Node
 
 enum RACE {
 	Human,
-	Orc
+	Orc, 
+	Undead
 }
 
 var building_data = {
-	"GoldMine": {
+	"gold_mine": {
 		"hp": 100,
 		"race": RACE.Human,
-		"cost": 100,
+		"cost": 0,
 		"description": "Gold mine to mine gold in."
 	},
-	"Barracks": {
+	"barracks": {
 		"hp": 100,
 		"race": RACE.Human,
-		"cost": 200,
+		"cost": 0,
 		"description": "Barracks to train soldiers."
 	},
 }

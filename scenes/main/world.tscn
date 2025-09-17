@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b5m2m0210d0vw"]
+[gd_scene load_steps=8 format=3 uid="uid://b5m2m0210d0vw"]
 
 [ext_resource type="Script" path="res://ui/camera.gd" id="1_nuo4p"]
 [ext_resource type="Script" path="res://scenes/main/world.gd" id="1_w0egm"]
@@ -6,8 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bse3ca77h5goc" path="res://assets/environment/Grass.png" id="2_d6tsr"]
 [ext_resource type="PackedScene" uid="uid://d3b2tcke5u8gr" path="res://scenes/main/map_1.tscn" id="3_q3ddq"]
 [ext_resource type="PackedScene" uid="uid://bu0p4rcdn5fv3" path="res://ui/ui.tscn" id="5_kfj5j"]
-[ext_resource type="PackedScene" uid="uid://7tyfc6rwmd61" path="res://scenes/buildings/barracks.tscn" id="7_6h63t"]
-[ext_resource type="PackedScene" uid="uid://0mo13qfbnj27" path="res://scenes/buildings/gold_mine.tscn" id="8_6yugb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5c8r3"]
 atlas = ExtResource("2_d6tsr")
@@ -27,36 +25,37 @@ stretch_mode = 1
 [node name="Map1" parent="." instance=ExtResource("3_q3ddq")]
 
 [node name="Camera" type="Camera2D" parent="."]
+position = Vector2(295, 202)
+zoom = Vector2(2, 2)
 script = ExtResource("1_nuo4p")
+ZOOM_MIN = 1.0
 
 [node name="Units" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Unit" parent="Units" instance=ExtResource("2_acy6l")]
 position = Vector2(286, 150)
+collision_layer = 1
+collision_mask = 1
 
 [node name="Unit2" parent="Units" instance=ExtResource("2_acy6l")]
 position = Vector2(360, 150)
+collision_layer = 1
+collision_mask = 1
 
 [node name="Unit3" parent="Units" instance=ExtResource("2_acy6l")]
 position = Vector2(323, 182)
+collision_layer = 1
+collision_mask = 1
 
 [node name="Unit4" parent="Units" instance=ExtResource("2_acy6l")]
 position = Vector2(253, 204)
+collision_layer = 1
+collision_mask = 1
 
 [node name="Unit5" parent="Units" instance=ExtResource("2_acy6l")]
 position = Vector2(363, 211)
-
-[node name="Objects" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="Buildings" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="Barracks" parent="Buildings" instance=ExtResource("7_6h63t")]
-position = Vector2(274, 275)
-
-[node name="GoldMine" parent="Buildings" instance=ExtResource("8_6yugb")]
-position = Vector2(195, 171)
+collision_layer = 1
+collision_mask = 1
 
 [node name="UI" parent="." instance=ExtResource("5_kfj5j")]

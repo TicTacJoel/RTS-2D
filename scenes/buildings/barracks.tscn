@@ -33,7 +33,7 @@ offset_bottom = 2.0
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_6qe6h")
 
-[node name="Barracks" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
 scale = Vector2(2, 2)
 texture = ExtResource("1_dd4aj")

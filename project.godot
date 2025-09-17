@@ -24,6 +24,7 @@ GameData="*res://globals/GameData.gd"
 
 unit=""
 building=""
+build_buttons=""
 
 [input]
 

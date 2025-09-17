@@ -16,6 +16,22 @@ var units = []
 #------------------------------------------------------------------------------|
 func _ready() -> void:
 	get_units()
+	current_gold = Global.Gold
+	for i in get_tree().get_nodes_in_group("build_buttons"):
+		i.pressed.connect(initiate_build_mode.bind(i.name))
+
+#------------------------------------------------------------------------------|
+func _process(delta: float) -> void:
+	if build_mode: 
+		update_building_preview()
+
+#------------------------------------------------------------------------------|
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_released("RightClick") and build_mode == true:
+		cancel_build_mode()
+	if event.is_action_released("LeftClick") and build_mode == true:
+		verify_and_build()
+		cancel_build_mode()
 
 #------------------------------------------------------------------------------|
 func get_units() -> void:
@@ -54,46 +70,40 @@ func initiate_build_mode(building_type):
 		cancel_build_mode()
 	build_type = building_type
 	build_mode = true
-	# TODO: create function
-	#get_node("UI").set_building_preview(build_type, get_global_mouse_position())
+	ui.set_building_preview(build_type, get_global_mouse_position())
 
 #------------------------------------------------------------------------------|
-func update_tower_preview():
+func update_building_preview():
 	var mouse_position = get_global_mouse_position()
-	var current_tile = map_node.get_node("TowerExclusion").local_to_map(mouse_position)
-	var tile_position = map_node.get_node("TowerExclusion").map_to_local(current_tile)
+	var current_tile = map_node.get_node("BuildingExclusion").local_to_map(mouse_position)
+	var tile_position = map_node.get_node("BuildingExclusion").map_to_local(current_tile)
 	
-	if map_node.get_node("TowerExclusion").get_cell_source_id(0, current_tile) == -1 and current_gold >= GameData.building_data[build_type]["cost"]:
-		# TODO: create function
-		#get_node("UI").update_tower_preview(tile_position, Globals.COLORS.green)
+	if map_node.get_node("BuildingExclusion").get_cell_source_id(current_tile) == -1 and current_gold >= GameData.building_data[build_type]["cost"]:
+		ui.update_building_preview(tile_position, Global.COLORS.green)
 		build_valid = true
 		build_location = tile_position
 		build_tile = current_tile
 	else:
-		# TODO: create function
-		#get_node("UI").update_tower_preview(tile_position, Globals.COLORS.red)
+		ui.update_building_preview(tile_position, Global.COLORS.red)
 		build_valid = false
 
 #------------------------------------------------------------------------------|
 func cancel_build_mode():
 	build_mode = false
 	build_valid = false
-	#get_node("UI/BuildPreview").free()
+	get_node("UI/BuildingPreview").free()
 
 #------------------------------------------------------------------------------|
 func verify_and_build():
 	if  build_valid:
 		if current_gold >= GameData.building_data[build_type]["cost"]:
-			pass
-			#var new_tower = load("res://Scenes/Turrets/" + build_type + ".tscn").instantiate()
-			#new_tower.position = build_location
-			#new_tower.built = true
-			#new_tower.type = build_type
+			var new_tower = load("res://scenes/buildings/" + build_type + ".tscn").instantiate()
+			new_tower.position = build_location
+			new_tower.type = build_type
 			#new_tower.category = GameData.tower_data[build_type]["category"]
-			#map_node.get_node("Turrets").add_child(new_tower, true)
-			#map_node.get_node("TowerExclusion").set_cell(0, build_tile, 5, Vector2(1,0))
-			#current_gold -= GameData.building_data[build_type]["cost"]
-			#money_label.text = str(current_money)
+			map_node.get_node("Buildings").add_child(new_tower, true)
+			map_node.get_node("BuildingExclusion").set_cell(build_tile, 5, Vector2(1,0))
+			Global.Gold -= GameData.building_data[build_type]["cost"]
 
 #------------------------------------------------------------------------------|
 func show_building_info():

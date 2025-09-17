@@ -9,6 +9,10 @@ extends StaticBody2D
 var mouseEntered = false
 var selected = false
 
+# Building
+var type
+var build = false
+
 signal update_location
 signal destroyed
 
