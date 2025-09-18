@@ -19,6 +19,7 @@ func _ready() -> void:
 	current_gold = Global.Gold
 	for i in get_tree().get_nodes_in_group("build_buttons"):
 		i.pressed.connect(initiate_build_mode.bind(i.name))
+	ui.map_node = map_node
 
 #------------------------------------------------------------------------------|
 func _process(delta: float) -> void:
@@ -74,7 +75,8 @@ func initiate_build_mode(building_type):
 
 #------------------------------------------------------------------------------|
 func update_building_preview():
-	var mouse_position = get_global_mouse_position()
+	#var mouse_position = get_global_mouse_position()
+	var mouse_position = map_node.to_local(get_global_mouse_position())
 	var current_tile = map_node.get_node("BuildingExclusion").local_to_map(mouse_position)
 	var tile_position = map_node.get_node("BuildingExclusion").map_to_local(current_tile)
 	
@@ -91,7 +93,7 @@ func update_building_preview():
 func cancel_build_mode():
 	build_mode = false
 	build_valid = false
-	get_node("UI/BuildingPreview").free()
+	get_node("Map1/BuildingPreview").free()
 
 #------------------------------------------------------------------------------|
 func verify_and_build():
@@ -100,7 +102,6 @@ func verify_and_build():
 			var new_tower = load("res://scenes/buildings/" + build_type + ".tscn").instantiate()
 			new_tower.position = build_location
 			new_tower.type = build_type
-			#new_tower.category = GameData.tower_data[build_type]["category"]
 			map_node.get_node("Buildings").add_child(new_tower, true)
 			map_node.get_node("BuildingExclusion").set_cell(build_tile, 5, Vector2(1,0))
 			Global.Gold -= GameData.building_data[build_type]["cost"]

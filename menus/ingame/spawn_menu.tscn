@@ -33,6 +33,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Label" type="Label" parent="HUD"]
+layout_mode = 0
 offset_left = 325.0
 offset_top = 518.0
 offset_right = 393.0
@@ -40,6 +41,7 @@ offset_bottom = 541.0
 text = "Barracks"
 
 [node name="ConfirmBtn" type="Button" parent="HUD"]
+layout_mode = 0
 offset_left = 327.0
 offset_top = 547.0
 offset_right = 425.0
@@ -48,6 +50,7 @@ text = "Soldier"
 icon = SubResource("AtlasTexture_80obs")
 
 [node name="CancelBtn" type="Button" parent="HUD"]
+layout_mode = 0
 offset_left = 813.0
 offset_top = 511.0
 offset_right = 831.0
