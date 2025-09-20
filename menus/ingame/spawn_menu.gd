@@ -4,7 +4,7 @@ extends CanvasLayer
 @onready var spawn_point = get_parent().spawn_point.global_position
 # TODO: find some cleaner way of doing this
 @onready var world_path = get_tree().get_root().get_node("World")
-@onready var units_container_path = get_tree().get_root().get_node("World/Units")
+@onready var units_container_path = get_tree().get_root().get_node("World/Map1/Units")
 
 #------------------------------------------------------------------------------|
 func spawn_unit() -> void:

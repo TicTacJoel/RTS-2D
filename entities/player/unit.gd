@@ -9,16 +9,20 @@ extends CharacterBody2D
 var follow_cursor: bool = false
 var speed: int = 50
 
+var minimap_marker: Node = null
+
 signal update_location(pos)
 signal died
 
 #------------------------------------------------------------------------------|
 func _ready() -> void:
 	set_selected(selected)
+	Global.minimap.add_marker(self)
 
 #------------------------------------------------------------------------------|
 func _physics_process(_delta: float) -> void:
-	update_location.emit(global_position)
+	#update_location.emit(global_position)
+	emit_signal("update_location", global_position)
 	
 	if follow_cursor:
 		if selected:
@@ -51,5 +55,6 @@ func set_selected(isSelected: bool):
 
 #------------------------------------------------------------------------------|
 func _on_died():
-	died.emit()
+	#died.emit()
+	emit_signal("died")
 	queue_free()

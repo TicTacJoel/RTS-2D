@@ -74,6 +74,7 @@ _data = {
 }
 
 [node name="Unit" type="CharacterBody2D" groups=["unit"]]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_bmucl")

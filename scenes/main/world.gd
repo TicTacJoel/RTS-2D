@@ -22,7 +22,7 @@ func _ready() -> void:
 	ui.map_node = map_node
 
 #------------------------------------------------------------------------------|
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if build_mode: 
 		update_building_preview()
 

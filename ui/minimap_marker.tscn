@@ -5,5 +5,6 @@
 
 [node name="MinimapMarker" type="Sprite2D"]
 modulate = Color(0.714936, 0, 0.173755, 1)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_10cko")
 script = ExtResource("2_vmy2i")

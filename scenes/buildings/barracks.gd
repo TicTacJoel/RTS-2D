@@ -8,6 +8,7 @@ extends StaticBody2D
 
 var mouseEntered = false
 var selected = false
+var minimap_marker: Node = null
 
 # Building
 var type
@@ -17,8 +18,8 @@ signal update_location
 signal destroyed
 
 func _ready() -> void:
-	
-	await get_tree().create_timer(1.0).timeout
+	Global.minimap.add_marker(self)
+	#await get_tree().create_timer(1.0).timeout
 	update_location.emit(global_position)
 
 #------------------------------------------------------------------------------|
@@ -36,9 +37,7 @@ func _input(event: InputEvent) -> void:
 #------------------------------------------------------------------------------|
 func _on_mouse_entered() -> void:
 	mouseEntered = true
-	print("MOUSE ENTERED")
 
 #------------------------------------------------------------------------------|
 func _on_mouse_exited() -> void:
 	mouseEntered = false
-	print("MOUSE EXITED")

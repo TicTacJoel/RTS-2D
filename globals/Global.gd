@@ -6,6 +6,7 @@ var Wood: int = 0
 var Gold: int = 0
 
 var minimap_zoom_factor = 3
+var minimap: Node = null
 
 const COLORS = {
 	"red": "bf001e",

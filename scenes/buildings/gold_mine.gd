@@ -8,6 +8,7 @@ var pop_label = preload("res://scenes/helper/pop_label.tscn")
 var total_time = 50
 var current_time
 var gold_increase: int = 10
+var minimap_marker: Node = null
 
 # Building
 var type
@@ -20,7 +21,8 @@ signal destroyed
 func _ready() -> void:
 	reset()
 	
-	await get_tree().create_timer(1.0).timeout
+	Global.minimap.add_marker(self)
+	#await get_tree().create_timer(1.0).timeout
 	update_location.emit(global_position)
 
 #------------------------------------------------------------------------------|
