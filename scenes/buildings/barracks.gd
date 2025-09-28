@@ -17,6 +17,7 @@ var build = false
 signal update_location
 signal destroyed
 
+#------------------------------------------------------------------------------|
 func _ready() -> void:
 	Global.minimap.add_marker(self)
 	#await get_tree().create_timer(1.0).timeout

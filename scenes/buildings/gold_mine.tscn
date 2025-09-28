@@ -24,17 +24,18 @@ texture = ExtResource("2_u3j1k")
 position = Vector2(-0.5, -8)
 shape = SubResource("RectangleShape2D_a7qux")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
-
 [node name="ProgressBar" type="ProgressBar" parent="."]
+z_index = 2
 offset_left = -8.0
-offset_top = -19.0
+offset_top = -27.0
 offset_right = 8.0
-offset_bottom = -17.0
+offset_bottom = -25.0
 theme_override_styles/background = SubResource("StyleBoxFlat_gxa3h")
 theme_override_styles/fill = SubResource("StyleBoxFlat_dxcyf")
 value = 50.0
 show_percentage = false
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

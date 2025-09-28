@@ -1,10 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://blwrkk68b82bg"]
 
 [ext_resource type="Script" path="res://entities/player/unit.gd" id="1_bmucl"]
-[ext_resource type="Texture2D" uid="uid://cv5cuh7qbcamg" path="res://assets/player/Human-Soldier.png" id="1_yb2o3"]
+[ext_resource type="Texture2D" uid="uid://mx4r31cas5v" path="res://assets/units/orcs/Orc_sword_ponytail_animation-Sheet.png" id="2_efhlm"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ynait"]
-size = Vector2(10, 7)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6km0o"]
+radius = 5.5
+height = 12.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_camkr"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -32,7 +33,6 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_4ged1"]
 resource_name = "idle"
-length = 0.4
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -42,15 +42,15 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1]
+"values": [0, 1, 2, 3, 4]
 }
 
 [sub_resource type="Animation" id="Animation_lsleb"]
-resource_name = "walk_s"
-length = 0.8
+resource_name = "walk"
+length = 0.6
 loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
@@ -60,28 +60,30 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [1, 2, 3, 4]
+"values": [5, 6, 7, 8, 9, 10]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ewfk7"]
 _data = {
 "RESET": SubResource("Animation_2kcak"),
 "idle": SubResource("Animation_4ged1"),
-"walk_s": SubResource("Animation_lsleb")
+"walk": SubResource("Animation_lsleb")
 }
 
 [node name="Unit" type="CharacterBody2D" groups=["unit"]]
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 7
+motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_bmucl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -3.5)
-shape = SubResource("RectangleShape2D_ynait")
+position = Vector2(-1, -5)
+shape = SubResource("CapsuleShape2D_6km0o")
 
 [node name="Selected" type="Panel" parent="."]
 visible = false
@@ -92,10 +94,10 @@ offset_bottom = 2.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_camkr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -7)
-texture = ExtResource("1_yb2o3")
-hframes = 29
-vframes = 8
+position = Vector2(0, -12)
+texture = ExtResource("2_efhlm")
+hframes = 8
+vframes = 2
 frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -103,3 +105,14 @@ libraries = {
 "": SubResource("AnimationLibrary_ewfk7")
 }
 autoplay = "idle"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 5.0
+avoidance_layers = 4
+avoidance_mask = 7
+debug_enabled = true
+debug_use_custom = true
+debug_path_custom_color = Color(0.207045, 1.46317e-05, 0.839436, 1)
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

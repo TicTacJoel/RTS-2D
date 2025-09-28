@@ -54,6 +54,9 @@ WheelDown={
 2d_physics/layer_1="Environment"
 2d_physics/layer_2="Buildings"
 2d_physics/layer_3="Units"
+avoidance/layer_1="Environment"
+avoidance/layer_2="Buildings"
+avoidance/layer_3="Units"
 
 [rendering]
 
