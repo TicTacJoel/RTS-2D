@@ -23,12 +23,6 @@ signal died
 func _ready() -> void:
 	set_selected(selected)
 	Global.minimap.add_marker(self)
-	#var mat := PhysicsMaterial.new()
-	#mat.friction = 0.0
-	#mat.bounce = 0.0
-	#mat.rough = false
-	#mat.absorbent = false
-	#unit.physics_material_override = mat
 
 #------------------------------------------------------------------------------|
 func _physics_process(_delta: float) -> void:
@@ -44,7 +38,6 @@ func _physics_process(_delta: float) -> void:
 			var next_point: Vector2 = nav_agent.get_next_path_position()
 			var new_velocity: Vector2 = (global_position.direction_to(next_point) * speed)
 			nav_agent.velocity = new_velocity
-			#velocity = new_velocity
 			#velocity = (next_point - global_position).normalized() * speed
 			#move_and_slide()
 

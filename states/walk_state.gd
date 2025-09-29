@@ -1,16 +1,17 @@
 extends State
 
+var destination : Vector2 = Vector2.ZERO
+
 #------------------------------------------------------------------------------|
 func enter(prev_state: State) -> void:
-	if state_owner.has_method("play_animation"):
-		state_owner.play_animation("walk")
+	state_owner.play_animation("walk")
+	destination = state_owner.get_global_mouse_position()
 
 #------------------------------------------------------------------------------|
 func update(delta: float) -> void:
-	var input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	if input_vector == Vector2.ZERO:
+	var dir = (destination - state_owner.global_position)
+	if dir.length() < 5:
 		state_owner.state_machine.change_state("Idle")
 		return
-
-	state_owner.velocity = input_vector * state_owner.speed
+	state_owner.velocity = dir.normalized() * state_owner.move_speed
 	state_owner.move_and_slide()
