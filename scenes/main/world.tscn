@@ -21,12 +21,12 @@ offset_bottom = 335.0
 texture = SubResource("AtlasTexture_5c8r3")
 stretch_mode = 1
 
-[node name="Map1" parent="." instance=ExtResource("3_q3ddq")]
-
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(295, 202)
 zoom = Vector2(2, 2)
 script = ExtResource("1_nuo4p")
 ZOOM_MIN = 1.0
+
+[node name="Map1" parent="." instance=ExtResource("3_q3ddq")]
 
 [node name="UI" parent="." instance=ExtResource("5_kfj5j")]
