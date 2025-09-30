@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://blwrkk68b82bg"]
+[gd_scene load_steps=13 format=3 uid="uid://blwrkk68b82bg"]
 
 [ext_resource type="Script" path="res://entities/player/unit.gd" id="1_bmucl"]
 [ext_resource type="Texture2D" uid="uid://mx4r31cas5v" path="res://assets/units/orcs/Orc_sword_ponytail_animation-Sheet.png" id="2_efhlm"]
 [ext_resource type="Script" path="res://states/state_machine.gd" id="3_tnnnx"]
 [ext_resource type="PackedScene" uid="uid://lssm0473bdyw" path="res://states/idle_state.tscn" id="4_eslg1"]
 [ext_resource type="PackedScene" uid="uid://bvykou6uibuvj" path="res://states/walk_state.tscn" id="5_xt8dr"]
+[ext_resource type="PackedScene" uid="uid://cp445e1xnlaoj" path="res://states/attack_state.tscn" id="6_bsdgn"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6km0o"]
 radius = 5.5
@@ -114,9 +115,6 @@ avoidance_enabled = true
 radius = 5.0
 avoidance_layers = 4
 avoidance_mask = 7
-debug_enabled = true
-debug_use_custom = true
-debug_path_custom_color = Color(0.207045, 1.46317e-05, 0.839436, 1)
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("3_tnnnx")
@@ -124,5 +122,7 @@ script = ExtResource("3_tnnnx")
 [node name="IdleState" parent="StateMachine" instance=ExtResource("4_eslg1")]
 
 [node name="WalkState" parent="StateMachine" instance=ExtResource("5_xt8dr")]
+
+[node name="AttackState" parent="StateMachine" instance=ExtResource("6_bsdgn")]
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

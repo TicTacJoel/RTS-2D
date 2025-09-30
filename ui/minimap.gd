@@ -24,17 +24,16 @@ func _physics_process(_delta: float) -> void:
 	camera.zoom = camera_path.zoom
 
 #------------------------------------------------------------------------------|
-func add_marker(owner: Node2D) -> void:
+func add_marker(object: Node2D) -> void:
 	var marker = marker_scene.instantiate()
-	if owner.is_in_group("building"):
+	if object.is_in_group("building"):
 		marker.modulate = Color.GREEN
 		marker.scale = Vector2(1, 1)
 		buildings.add_child(marker)
-		owner.destroyed.connect(marker.delete_marker)
-	elif owner.is_in_group("unit"):
+		object.destroyed.connect(marker.delete_marker)
+	elif object.is_in_group("unit"):
 		marker.modulate = Color.GREEN
 		units.add_child(marker)
-		owner.died.connect(marker.delete_marker)
+		object.died.connect(marker.delete_marker)
 	
-	owner.update_location.connect(marker.update_position)
-	owner.minimap_marker = marker
+	object.update_location.connect(marker.update_position)

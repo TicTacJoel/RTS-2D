@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var gold_label: Label = $HUD/GoldLabel
 
 var map_node: Node2D
+var building_preview: Node2D
 
 ##-----------------------------------------------------------------------------/
 func _process(_delta: float) -> void:
@@ -17,12 +18,14 @@ func set_building_preview(building_type, mouse_position) -> void:
 	drag_tower.modulate = Global.COLORS.green
 	map_node.add_child(drag_tower)
 	drag_tower.position = mouse_position
+	
+	building_preview = drag_tower
 
 ##-----------------------------------------------------------------------------/
 func update_building_preview(new_position, color):
-	get_node("../Map1/BuildingPreview").position = new_position
-	if get_node("../Map1/BuildingPreview").modulate != Color(color):
-		get_node("../Map1/BuildingPreview").modulate = Color(color)
+	if building_preview and is_instance_valid(building_preview):
+		building_preview.position = new_position
+		building_preview.modulate = Color(color)
 
 ##-----------------------------------------------------------------------------/
 func _on_barracks_mouse_entered() -> void:

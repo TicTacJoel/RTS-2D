@@ -15,8 +15,16 @@ func _ready() -> void:
 			child.state_owner = character
 	
 	# Start in Idle if available
-	if "Idle" in states:
-		change_state("Idle")
+	call_deferred("start")
+
+func start() -> void:
+	if "IdleState" in states:
+		change_state("IdleState")
+
+#------------------------------------------------------------------------------|
+func _physics_process_state(delta: float) -> void:
+	if current_state:
+		current_state.update(delta)
 
 #------------------------------------------------------------------------------|
 func change_state(new_state_name: String) -> void:
@@ -30,11 +38,6 @@ func change_state(new_state_name: String) -> void:
 	var prev_state = current_state
 	current_state = new_state
 	current_state.enter(prev_state)
-
-#------------------------------------------------------------------------------|
-func _process(delta: float) -> void:
-	if current_state:
-		current_state.update(delta)
 
 #------------------------------------------------------------------------------|
 func _unhandled_input(event: InputEvent) -> void:

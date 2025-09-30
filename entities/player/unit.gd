@@ -4,17 +4,15 @@ extends CharacterBody2D
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var selected_box: Panel = $Selected
-#@onready var target = position
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var unit: CharacterBody2D = $"."
+@onready var state_machine: StateMachine = $StateMachine
 
 var follow_cursor: bool = false
 var speed: int = 50
 var target: Vector2
 var moving: bool = false
-
-var minimap_marker: Node = null
 
 signal update_location(pos)
 signal died
@@ -25,21 +23,11 @@ func _ready() -> void:
 	Global.minimap.add_marker(self)
 
 #------------------------------------------------------------------------------|
-func _physics_process(_delta: float) -> void:
-	#update_location.emit(global_position)
+func _physics_process(delta: float) -> void:
 	emit_signal("update_location", global_position)
 	
-	if moving:
-		if nav_agent.is_navigation_finished():
-			moving = false
-			velocity = Vector2.ZERO
-			animation_player.play("idle")
-		else:
-			var next_point: Vector2 = nav_agent.get_next_path_position()
-			var new_velocity: Vector2 = (global_position.direction_to(next_point) * speed)
-			nav_agent.velocity = new_velocity
-			#velocity = (next_point - global_position).normalized() * speed
-			#move_and_slide()
+	if state_machine:
+		state_machine._physics_process_state(delta)
 
 #------------------------------------------------------------------------------|
 func _input(event: InputEvent) -> void:
@@ -54,7 +42,6 @@ func set_target(pos: Vector2) -> void:
 	target = pos
 	nav_agent.target_position = pos
 	moving = true
-	animation_player.play("walk")
 
 #------------------------------------------------------------------------------|
 func set_selected(isSelected: bool):
@@ -63,11 +50,10 @@ func set_selected(isSelected: bool):
 
 #------------------------------------------------------------------------------|
 func _on_died():
-	#died.emit()
 	emit_signal("died")
 	queue_free()
 
-
+#------------------------------------------------------------------------------|
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity
 	move_and_slide()

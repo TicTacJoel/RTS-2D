@@ -132,7 +132,10 @@ func update_building_preview():
 func cancel_build_mode():
 	build_mode = false
 	build_valid = false
-	get_node("Map1/BuildingPreview").free()
+	
+	if ui.building_preview and is_instance_valid(ui.building_preview):
+		ui.building_preview.free()
+		ui.building_preview = null
 
 #------------------------------------------------------------------------------|
 func verify_and_build():

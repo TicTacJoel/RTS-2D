@@ -7,8 +7,8 @@ extends StaticBody2D
 @onready var spawn_menu: CanvasLayer = $SpawnMenu
 
 var mouseEntered = false
+var spawn_menu_mouse_entered = false
 var selected = false
-var minimap_marker: Node = null
 
 # Building
 var type
@@ -20,7 +20,6 @@ signal destroyed
 #------------------------------------------------------------------------------|
 func _ready() -> void:
 	Global.minimap.add_marker(self)
-	#await get_tree().create_timer(1.0).timeout
 	update_location.emit(global_position)
 
 #------------------------------------------------------------------------------|
@@ -31,9 +30,18 @@ func _process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("LeftClick"):
 		if mouseEntered:
-			selected = !selected
-			if selected:
-				spawn_menu.visible = true
+			selected = true
+			spawn_menu.visible = true
+			# TODO: Debugging
+			#_on_destroyed()
+		elif spawn_menu.clicked_outside(event):
+			selected = false
+			spawn_menu.visible = false
+
+#------------------------------------------------------------------------------|
+func _on_destroyed():
+	emit_signal("destroyed")
+	queue_free()
 
 #------------------------------------------------------------------------------|
 func _on_mouse_entered() -> void:

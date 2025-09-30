@@ -10,12 +10,12 @@ func enter(prev_state: State) -> void:
 #------------------------------------------------------------------------------|
 func update(delta: float) -> void:
 	if not state_owner.target:
-		state_owner.state_machine.change_state("Idle")
+		state_owner.state_machine.change_state("IdleState")
 		return
 
 	var distance = state_owner.global_position.distance_to(state_owner.target.global_position)
 	if distance > state_owner.attack_range:
-		state_owner.state_machine.change_state("Move")
+		state_owner.state_machine.change_state("WalkState")
 		return
 
 	cooldown_timer -= delta
