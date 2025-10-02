@@ -2,6 +2,7 @@ extends StaticBody2D
 
 @onready var progress_bar: ProgressBar = $ProgressBar
 @onready var timer: Timer = $Timer
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 var pop_label = preload("res://scenes/helper/pop_label.tscn")
 

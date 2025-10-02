@@ -13,13 +13,14 @@ func _process(_delta: float) -> void:
 
 ##-----------------------------------------------------------------------------/
 func set_building_preview(building_type, mouse_position) -> void:
-	var drag_tower = load("res://scenes/buildings/" + building_type + ".tscn").instantiate()
-	drag_tower.name = "BuildingPreview"
-	drag_tower.modulate = Global.COLORS.green
-	map_node.add_child(drag_tower)
-	drag_tower.position = mouse_position
+	var drag_building = load("res://scenes/buildings/" + building_type + ".tscn").instantiate()
+	drag_building.name = "BuildingPreview"
+	drag_building.modulate = Global.COLORS.green
+	map_node.add_child(drag_building)
+	drag_building.position = mouse_position
+	drag_building.collision_shape.disabled = true
 	
-	building_preview = drag_tower
+	building_preview = drag_building
 
 ##-----------------------------------------------------------------------------/
 func update_building_preview(new_position, color):

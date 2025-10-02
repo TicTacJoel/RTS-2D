@@ -20,14 +20,12 @@ signal died
 #------------------------------------------------------------------------------|
 func _ready() -> void:
 	set_selected(selected)
-	Global.minimap.add_marker(self)
+	add_marker()
 
 #------------------------------------------------------------------------------|
 func _physics_process(delta: float) -> void:
 	emit_signal("update_location", global_position)
-	
-	if state_machine:
-		state_machine._physics_process_state(delta)
+	state_machine_start(delta)
 
 #------------------------------------------------------------------------------|
 func _input(event: InputEvent) -> void:
@@ -36,6 +34,15 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_released("RightClick"):
 		follow_cursor = false
+
+#------------------------------------------------------------------------------|
+func add_marker() -> void:
+	Global.minimap.add_marker(self)
+
+#------------------------------------------------------------------------------|
+func state_machine_start(delta: float) -> void:
+	if state_machine:
+		state_machine._physics_process_state(delta)
 
 #------------------------------------------------------------------------------|
 func set_target(pos: Vector2) -> void:

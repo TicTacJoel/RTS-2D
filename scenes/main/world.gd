@@ -134,6 +134,7 @@ func cancel_build_mode():
 	build_valid = false
 	
 	if ui.building_preview and is_instance_valid(ui.building_preview):
+		ui.building_preview.collision_shape.disabled = false
 		ui.building_preview.free()
 		ui.building_preview = null
 

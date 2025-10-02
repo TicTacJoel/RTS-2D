@@ -2,6 +2,7 @@ extends StaticBody2D
 
 @export var unit: PackedScene
 @export var spawn_point: Node2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 @onready var selected_box: Panel = $Selected
 @onready var spawn_menu: CanvasLayer = $SpawnMenu
@@ -19,8 +20,12 @@ signal destroyed
 
 #------------------------------------------------------------------------------|
 func _ready() -> void:
-	Global.minimap.add_marker(self)
+	add_marker()
 	update_location.emit(global_position)
+
+#------------------------------------------------------------------------------|
+func add_marker() -> void:
+	Global.minimap.add_marker(self)
 
 #------------------------------------------------------------------------------|
 func _process(_delta: float) -> void:
