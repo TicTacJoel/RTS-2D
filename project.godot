@@ -19,6 +19,9 @@ config/icon="res://icon.svg"
 
 Global="*res://globals/Global.gd"
 GameData="*res://globals/GameData.gd"
+Types="*res://globals/Types.gd"
+UnitData="*res://globals/UnitData.gd"
+BuildingData="*res://globals/BuildingData.gd"
 
 [display]
 

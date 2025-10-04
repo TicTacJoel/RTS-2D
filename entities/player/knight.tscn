@@ -1,11 +1,11 @@
 [gd_scene load_steps=13 format=3 uid="uid://blwrkk68b82bg"]
 
-[ext_resource type="Script" path="res://entities/player/unit.gd" id="1_bmucl"]
-[ext_resource type="Texture2D" uid="uid://mx4r31cas5v" path="res://assets/units/orcs/Orc_sword_ponytail_animation-Sheet.png" id="2_efhlm"]
-[ext_resource type="Script" path="res://states/state_machine.gd" id="3_tnnnx"]
-[ext_resource type="PackedScene" uid="uid://lssm0473bdyw" path="res://states/idle_state.tscn" id="4_eslg1"]
-[ext_resource type="PackedScene" uid="uid://bvykou6uibuvj" path="res://states/walk_state.tscn" id="5_xt8dr"]
-[ext_resource type="PackedScene" uid="uid://cp445e1xnlaoj" path="res://states/attack_state.tscn" id="6_bsdgn"]
+[ext_resource type="Script" path="res://entities/player/unit.gd" id="1_fkbp6"]
+[ext_resource type="Texture2D" uid="uid://mx4r31cas5v" path="res://assets/units/orcs/Orc_sword_ponytail_animation-Sheet.png" id="2_ah0sy"]
+[ext_resource type="Script" path="res://states/state_machine.gd" id="3_okpet"]
+[ext_resource type="PackedScene" uid="uid://lssm0473bdyw" path="res://states/idle_state.tscn" id="4_2faml"]
+[ext_resource type="PackedScene" uid="uid://bvykou6uibuvj" path="res://states/walk_state.tscn" id="5_da5mv"]
+[ext_resource type="PackedScene" uid="uid://cp445e1xnlaoj" path="res://states/attack_state.tscn" id="6_128ef"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6km0o"]
 radius = 5.5
@@ -77,13 +77,15 @@ _data = {
 "walk": SubResource("Animation_lsleb")
 }
 
-[node name="Unit" type="CharacterBody2D" groups=["unit"]]
+[node name="Knight" type="CharacterBody2D" groups=["unit"]]
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 7
 motion_mode = 1
 wall_min_slide_angle = 0.0
-script = ExtResource("1_bmucl")
+script = ExtResource("1_fkbp6")
+race = 1
+unit_type = "Warrior"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -5)
@@ -99,7 +101,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_camkr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -12)
-texture = ExtResource("2_efhlm")
+texture = ExtResource("2_ah0sy")
 hframes = 8
 vframes = 2
 frame = 3
@@ -117,12 +119,12 @@ avoidance_layers = 4
 avoidance_mask = 7
 
 [node name="StateMachine" type="Node" parent="."]
-script = ExtResource("3_tnnnx")
+script = ExtResource("3_okpet")
 
-[node name="IdleState" parent="StateMachine" instance=ExtResource("4_eslg1")]
+[node name="IdleState" parent="StateMachine" instance=ExtResource("4_2faml")]
 
-[node name="WalkState" parent="StateMachine" instance=ExtResource("5_xt8dr")]
+[node name="WalkState" parent="StateMachine" instance=ExtResource("5_da5mv")]
 
-[node name="AttackState" parent="StateMachine" instance=ExtResource("6_bsdgn")]
+[node name="AttackState" parent="StateMachine" instance=ExtResource("6_128ef")]
 
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]

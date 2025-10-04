@@ -1,24 +1,35 @@
 extends CharacterBody2D
 
-@export var selected = false
-
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var selected_box: Panel = $Selected
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var unit: CharacterBody2D = $"."
 @onready var state_machine: StateMachine = $StateMachine
+@onready var knight: CharacterBody2D = $"."
+
+# Stats
+var health: int
+var damage: int
+var attack_speed: float
+var movement_speed: float
+var cost: int
+var team: Types.TEAM
+var enemy: bool = false
+@export var race: Types.RACE
+@export var unit_type: String
 
 var follow_cursor: bool = false
-var speed: int = 50
 var target: Vector2
 var moving: bool = false
+var selected = false
 
 signal update_location(pos)
 signal died
 
 #------------------------------------------------------------------------------|
 func _ready() -> void:
+	get_stats()
 	set_selected(selected)
 	add_marker()
 
@@ -34,6 +45,19 @@ func _input(event: InputEvent) -> void:
 	
 	if event.is_action_released("RightClick"):
 		follow_cursor = false
+
+#------------------------------------------------------------------------------|
+func get_stats() -> void:
+	var stats = UnitData.get_unit_stats(race, unit_type)
+	if stats.is_empty():
+		push_error("Invalid unit type '%s' for race %s" % [unit_type, Types.RACE.keys()[race]])
+		return
+	
+	health = stats.Health
+	damage = stats.Damage
+	attack_speed = stats.Attack_speed
+	movement_speed = stats.Movement_speed
+	cost = stats.Cost
 
 #------------------------------------------------------------------------------|
 func add_marker() -> void:

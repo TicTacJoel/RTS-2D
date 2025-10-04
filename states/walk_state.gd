@@ -14,5 +14,5 @@ func update(delta: float) -> void:
 		state_owner.state_machine.change_state("IdleState")
 	else: 
 		var next_point: Vector2 = state_owner.nav_agent.get_next_path_position()
-		var new_velocity: Vector2 = state_owner.global_position.direction_to(next_point) * state_owner.speed
+		var new_velocity: Vector2 = state_owner.global_position.direction_to(next_point) * state_owner.movement_speed
 		state_owner.nav_agent.velocity = new_velocity

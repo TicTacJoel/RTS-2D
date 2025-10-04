@@ -15,16 +15,16 @@ var spawn_menu_mouse_entered: bool = false
 func spawn_unit() -> void:
 	var unitContainer = units_container_path
 	var unitInstance = unit.instantiate()
-	var offset: Vector2
+	var unitOffset: Vector2
 	var tries := 0
 	var max_tries := 10
 	
 	while tries < max_tries:
-		offset = Vector2(
+		unitOffset = Vector2(
 			randf_range(-spawn_radius, spawn_radius),
 			randf_range(-spawn_radius, spawn_radius)
 		)
-		var pos = spawn_point + offset
+		var pos = spawn_point + unitOffset
 		unitInstance.position = pos
 		tries += 1
 	

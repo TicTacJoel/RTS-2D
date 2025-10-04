@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://7tyfc6rwmd61"]
 
 [ext_resource type="Script" path="res://scenes/buildings/barracks.gd" id="1_vjkyq"]
-[ext_resource type="PackedScene" uid="uid://blwrkk68b82bg" path="res://entities/player/unit.tscn" id="2_5sfd4"]
+[ext_resource type="PackedScene" uid="uid://blwrkk68b82bg" path="res://entities/player/knight.tscn" id="2_5sfd4"]
 [ext_resource type="PackedScene" uid="uid://6xt5qfj0e564" path="res://menus/ingame/spawn_menu.tscn" id="3_51ad0"]
 [ext_resource type="Texture2D" uid="uid://bn7s3r88b2nce" path="res://assets/buildings/Barracks2.png" id="3_loask"]
 
@@ -25,6 +25,7 @@ input_pickable = true
 script = ExtResource("1_vjkyq")
 unit = ExtResource("2_5sfd4")
 spawn_point = NodePath("SpawnPoint")
+building_type = "Barracks"
 
 [node name="Selected" type="Panel" parent="."]
 visible = false

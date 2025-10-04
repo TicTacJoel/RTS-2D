@@ -15,17 +15,21 @@ var selected = false
 var type
 var build = false
 
+var health: int
+var cost: int
+var description: String
+var footprint: Array[Vector2]
+@export var race: Types.RACE
+@export var building_type: String
+
 signal update_location
 signal destroyed
 
 #------------------------------------------------------------------------------|
 func _ready() -> void:
+	get_stats()
 	add_marker()
 	update_location.emit(global_position)
-
-#------------------------------------------------------------------------------|
-func add_marker() -> void:
-	Global.minimap.add_marker(self)
 
 #------------------------------------------------------------------------------|
 func _process(_delta: float) -> void:
@@ -42,6 +46,22 @@ func _input(event: InputEvent) -> void:
 		elif spawn_menu.clicked_outside(event):
 			selected = false
 			spawn_menu.visible = false
+
+#------------------------------------------------------------------------------|
+func add_marker() -> void:
+	Global.minimap.add_marker(self)
+
+#------------------------------------------------------------------------------|
+func get_stats() -> void:
+	var stats = BuildingData.get_building_stats(race, building_type)
+	if stats.is_empty():
+		push_error("Invalid building type '%s' for race %s" % [building_type, Types.RACE.keys()[race]])
+		return
+	
+	health = stats.Health
+	cost = stats.Cost
+	description = stats.Description
+	footprint = stats.Footprint
 
 #------------------------------------------------------------------------------|
 func _on_destroyed():

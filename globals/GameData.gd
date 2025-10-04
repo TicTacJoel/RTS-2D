@@ -1,38 +1,11 @@
 extends Node
 
-enum RACE {
-	Human,
-	Orc, 
-	Undead
-}
+#------------------------------------------------------------------------------|
+# Convert enum -> string
+static func race_to_string(race: Types.RACE) -> String:
+	return Types.RACE.keys()[race]
 
-var building_data = {
-	"gold_mine": {
-		"hp": 100,
-		"race": RACE.Human,
-		"cost": 0,
-		"description": "Gold mine to mine gold in.",
-		"footprint": [
-			Vector2i(0, 0),
-			Vector2i(-1, 0),
-			Vector2i(1, 0),
-			Vector2i(-1, -1),
-			Vector2i(0, -1),
-			Vector2i(1, -1),
-		]
-	},
-	"barracks": {
-		"hp": 100,
-		"race": RACE.Human,
-		"cost": 0,
-		"description": "Barracks to train soldiers.",
-		"footprint": [
-			Vector2i(0, 0),
-			Vector2i(-1, 0),
-			Vector2i(1, 0),
-			Vector2i(-1, -1),
-			Vector2i(0, -1),
-			Vector2i(1, -1),
-		]
-	},
-}
+#------------------------------------------------------------------------------|
+# Convert string -> enum (returns -1 if not found)
+static func string_to_race(race_str: String) -> int:
+	return Types.RACE.get(race_str, -1)

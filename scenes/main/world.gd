@@ -9,6 +9,8 @@ var build_valid = false
 var build_tile
 var build_location
 var build_type
+# TODO: Change to not fixed value
+var race: String = "human"
 
 var current_gold
 var units = []
@@ -109,7 +111,8 @@ func update_building_preview():
 	build_valid = true
 	
 	# Get the building's footprint
-	var building_footprint = GameData.building_data[build_type]["footprint"]
+	# TODO: replace fixed "human" with race
+	var building_footprint = BuildingData.building_data[race][build_type]["Footprint"] 
 	
 	# Check if all tiles in the footprint are clear
 	for relative_pos in building_footprint:
@@ -118,7 +121,7 @@ func update_building_preview():
 			build_valid = false
 			break  # Exit the loop as soon as an invalid tile is found
 	
-	if current_gold < GameData.building_data[build_type]["cost"]:
+	if current_gold < BuildingData.building_data[race][build_type]["cost"]:
 		build_valid = false
 	
 	if build_valid:
@@ -142,11 +145,11 @@ func cancel_build_mode():
 func verify_and_build():
 	var building_exclusion = map_node.get_node("BuildingExclusion")
 	# Get size and footprint of building
-	var building_footprint = GameData.building_data[build_type]["footprint"]
+	var building_footprint = BuildingData.building_data[race][build_type]["Footprint"]
 	var ground_tilemap = map_node.get_node("Ground")
 	
 	if  build_valid:
-		if current_gold >= GameData.building_data[build_type]["cost"]:
+		if current_gold >= BuildingData.building_data[race][build_type]["cost"]:
 			var new_tower = load("res://scenes/buildings/" + build_type + ".tscn").instantiate()
 			new_tower.position = build_location
 			new_tower.type = build_type
@@ -160,7 +163,7 @@ func verify_and_build():
 			
 			# Let ground know, it needs to rebake
 			ground_tilemap.notify_runtime_tile_data_update()
-			Global.Gold -= GameData.building_data[build_type]["cost"]
+			Global.Gold -= BuildingData.building_data[race][build_type]["cost"]
 
 #------------------------------------------------------------------------------|
 func show_building_info():

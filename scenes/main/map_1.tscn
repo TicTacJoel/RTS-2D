@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://0mo13qfbnj27" path="res://scenes/buildings/gold_mine.tscn" id="3_st6wl"]
 [ext_resource type="Texture2D" uid="uid://bn7s3r88b2nce" path="res://assets/buildings/Barracks2.png" id="4_6b2kv"]
 [ext_resource type="PackedScene" uid="uid://7tyfc6rwmd61" path="res://scenes/buildings/barracks.tscn" id="4_cgk28"]
-[ext_resource type="PackedScene" uid="uid://blwrkk68b82bg" path="res://entities/player/unit.tscn" id="6_t6pcv"]
+[ext_resource type="PackedScene" uid="uid://blwrkk68b82bg" path="res://entities/player/knight.tscn" id="6_t6pcv"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3sbdv"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -644,5 +644,5 @@ position = Vector2(64, 320)
 [node name="Units" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Unit" parent="Units" instance=ExtResource("6_t6pcv")]
-position = Vector2(404, 193)
+[node name="Knight" parent="Units" instance=ExtResource("6_t6pcv")]
+position = Vector2(440, 191)
