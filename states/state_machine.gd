@@ -17,6 +17,7 @@ func _ready() -> void:
 	# Start in Idle if available
 	call_deferred("start")
 
+#------------------------------------------------------------------------------|
 func start() -> void:
 	if "IdleState" in states:
 		change_state("IdleState")

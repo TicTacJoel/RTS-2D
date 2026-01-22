@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2n4y2n7r2coh"]
+
+[ext_resource type="Script" path="res://states/chase_state.gd" id="1_tsc0f"]
+
+[node name="ChaseState" type="Node2D"]
+script = ExtResource("1_tsc0f")

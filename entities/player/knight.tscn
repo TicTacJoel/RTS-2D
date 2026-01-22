@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://blwrkk68b82bg"]
+[gd_scene load_steps=16 format=3 uid="uid://blwrkk68b82bg"]
 
 [ext_resource type="Script" path="res://entities/player/unit.gd" id="1_fkbp6"]
 [ext_resource type="Texture2D" uid="uid://mx4r31cas5v" path="res://assets/units/orcs/Orc_sword_ponytail_animation-Sheet.png" id="2_ah0sy"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://lssm0473bdyw" path="res://states/idle_state.tscn" id="4_2faml"]
 [ext_resource type="PackedScene" uid="uid://bvykou6uibuvj" path="res://states/walk_state.tscn" id="5_da5mv"]
 [ext_resource type="PackedScene" uid="uid://cp445e1xnlaoj" path="res://states/attack_state.tscn" id="6_128ef"]
+[ext_resource type="PackedScene" uid="uid://d2n4y2n7r2coh" path="res://states/chase_state.tscn" id="6_ni55x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6km0o"]
 radius = 5.5
@@ -77,6 +78,12 @@ _data = {
 "walk": SubResource("Animation_lsleb")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_qg4lo"]
+radius = 145.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iihep"]
+radius = 29.0172
+
 [node name="Knight" type="CharacterBody2D" groups=["unit"]]
 y_sort_enabled = true
 collision_layer = 4
@@ -125,6 +132,29 @@ script = ExtResource("3_okpet")
 
 [node name="WalkState" parent="StateMachine" instance=ExtResource("5_da5mv")]
 
+[node name="ChaseState" parent="StateMachine" instance=ExtResource("6_ni55x")]
+
 [node name="AttackState" parent="StateMachine" instance=ExtResource("6_128ef")]
 
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="DetectionCollision" type="CollisionShape2D" parent="DetectionArea"]
+shape = SubResource("CircleShape2D_qg4lo")
+debug_color = Color(0.877043, 0.342322, 0, 0.42)
+
+[node name="AttackArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 6
+
+[node name="AttackCollision" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_iihep")
+debug_color = Color(0.992713, 0, 0.248152, 0.42)
+
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]

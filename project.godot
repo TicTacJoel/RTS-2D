@@ -33,6 +33,7 @@ window/stretch/aspect="expand"
 unit=""
 building=""
 build_buttons=""
+Enemy=""
 
 [input]
 

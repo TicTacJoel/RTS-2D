@@ -2,8 +2,8 @@ extends StaticBody2D
 
 @export var unit: PackedScene
 @export var spawn_point: Node2D
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var selected_box: Panel = $Selected
 @onready var spawn_menu: CanvasLayer = $SpawnMenu
 
@@ -17,8 +17,10 @@ var build = false
 
 var health: int
 var cost: int
+var team: Types.TEAM
+var enemy: bool = false
 var description: String
-var footprint: Array[Vector2]
+var footprint: Array
 @export var race: Types.RACE
 @export var building_type: String
 

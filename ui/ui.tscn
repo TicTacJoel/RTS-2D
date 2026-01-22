@@ -74,13 +74,13 @@ offset_top = -300.0
 offset_right = 32.0
 grow_vertical = 0
 
-[node name="barracks" type="TextureButton" parent="HUD/BuildBar" groups=["build_buttons"]]
+[node name="Barracks" type="TextureButton" parent="HUD/BuildBar" groups=["build_buttons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("PlaceholderTexture2D_nfex2")
 
-[node name="TextureRect" type="TextureRect" parent="HUD/BuildBar/barracks"]
+[node name="TextureRect" type="TextureRect" parent="HUD/BuildBar/Barracks"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -96,13 +96,13 @@ grow_vertical = 2
 scale = Vector2(0.7, 0.7)
 texture = SubResource("AtlasTexture_djss6")
 
-[node name="gold_mine" type="TextureButton" parent="HUD/BuildBar" groups=["build_buttons"]]
+[node name="Goldmine" type="TextureButton" parent="HUD/BuildBar" groups=["build_buttons"]]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = SubResource("PlaceholderTexture2D_qjrbp")
 
-[node name="TextureRect" type="TextureRect" parent="HUD/BuildBar/gold_mine"]
+[node name="TextureRect" type="TextureRect" parent="HUD/BuildBar/Goldmine"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -118,5 +118,5 @@ grow_vertical = 2
 scale = Vector2(0.7, 0.7)
 texture = SubResource("AtlasTexture_i5axg")
 
-[connection signal="mouse_entered" from="HUD/BuildBar/barracks" to="." method="_on_barracks_mouse_entered"]
-[connection signal="mouse_exited" from="HUD/BuildBar/barracks" to="." method="_on_barracks_mouse_exited"]
+[connection signal="mouse_entered" from="HUD/BuildBar/Barracks" to="." method="_on_barracks_mouse_entered"]
+[connection signal="mouse_exited" from="HUD/BuildBar/Barracks" to="." method="_on_barracks_mouse_exited"]

@@ -27,6 +27,7 @@ var unit_data = {
 			"Attack_speed": 1.0,
 			"Movement_speed": 50.0,
 			"Cost": 100,
+			"Description": "Description",
 		}, 
 		"Archer": {
 			"Health": 50,
@@ -34,6 +35,7 @@ var unit_data = {
 			"Attack_speed": 1.0,
 			"Movement_speed": 50.0,
 			"Cost": 100,
+			"Description": "Description",
 		}, 
 		"Cavalry": {
 			"Health": 50,
@@ -41,6 +43,7 @@ var unit_data = {
 			"Attack_speed": 1.0,
 			"Movement_speed": 50.0,
 			"Cost": 100,
+			"Description": "Description",
 		}
 	},
 	"Orc": {
@@ -50,6 +53,7 @@ var unit_data = {
 			"Attack_speed": 1.0,
 			"Movement_speed": 50.0,
 			"Cost": 100,
+			"Description": "Description",
 		}, 
 		"Spearman": {
 			"Health": 50,
@@ -57,6 +61,7 @@ var unit_data = {
 			"Attack_speed": 1.0,
 			"Movement_speed": 50.0,
 			"Cost": 100,
+			"Description": "Description",
 		}, 
 		"Warg": {
 			"Health": 50,
@@ -64,6 +69,7 @@ var unit_data = {
 			"Attack_speed": 1.0,
 			"Movement_speed": 50.0,
 			"Cost": 100,
+			"Description": "Description",
 		}
 	},
 }

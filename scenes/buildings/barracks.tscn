@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://7tyfc6rwmd61"]
 
-[ext_resource type="Script" path="res://scenes/buildings/barracks.gd" id="1_vjkyq"]
-[ext_resource type="PackedScene" uid="uid://blwrkk68b82bg" path="res://entities/player/knight.tscn" id="2_5sfd4"]
-[ext_resource type="PackedScene" uid="uid://6xt5qfj0e564" path="res://menus/ingame/spawn_menu.tscn" id="3_51ad0"]
-[ext_resource type="Texture2D" uid="uid://bn7s3r88b2nce" path="res://assets/buildings/Barracks2.png" id="3_loask"]
+[ext_resource type="Script" path="res://scenes/buildings/Barracks.gd" id="1_hm7xa"]
+[ext_resource type="PackedScene" uid="uid://blwrkk68b82bg" path="res://entities/player/knight.tscn" id="2_6bkop"]
+[ext_resource type="Texture2D" uid="uid://bn7s3r88b2nce" path="res://assets/buildings/Barracks2.png" id="3_ugh7e"]
+[ext_resource type="PackedScene" uid="uid://6xt5qfj0e564" path="res://menus/ingame/spawn_menu.tscn" id="4_n5hoo"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6qe6h"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -22,8 +22,8 @@ y_sort_enabled = true
 collision_layer = 2
 collision_mask = 4
 input_pickable = true
-script = ExtResource("1_vjkyq")
-unit = ExtResource("2_5sfd4")
+script = ExtResource("1_hm7xa")
+unit = ExtResource("2_6bkop")
 spawn_point = NodePath("SpawnPoint")
 building_type = "Barracks"
 
@@ -38,7 +38,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_6qe6h")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
-texture = ExtResource("3_loask")
+texture = ExtResource("3_ugh7e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10.5)
@@ -47,7 +47,7 @@ shape = SubResource("RectangleShape2D_fg47x")
 [node name="SpawnPoint" type="Node2D" parent="."]
 position = Vector2(0, 10)
 
-[node name="SpawnMenu" parent="." instance=ExtResource("3_51ad0")]
+[node name="SpawnMenu" parent="." instance=ExtResource("4_n5hoo")]
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

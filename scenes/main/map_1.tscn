@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://epnh6xiftfdy" path="res://assets/environment/Tileset_Grass.png" id="2_p8g1t"]
 [ext_resource type="PackedScene" uid="uid://caqsjuxt8bp3g" path="res://scenes/objects/tree.tscn" id="3_1kpf5"]
 [ext_resource type="Script" path="res://scenes/main/ground.gd" id="3_877jj"]
-[ext_resource type="PackedScene" uid="uid://0mo13qfbnj27" path="res://scenes/buildings/gold_mine.tscn" id="3_st6wl"]
+[ext_resource type="PackedScene" uid="uid://0mo13qfbnj27" path="res://scenes/buildings/Goldmine.tscn" id="3_st6wl"]
 [ext_resource type="Texture2D" uid="uid://bn7s3r88b2nce" path="res://assets/buildings/Barracks2.png" id="4_6b2kv"]
-[ext_resource type="PackedScene" uid="uid://7tyfc6rwmd61" path="res://scenes/buildings/barracks.tscn" id="4_cgk28"]
+[ext_resource type="PackedScene" uid="uid://7tyfc6rwmd61" path="res://scenes/buildings/Barracks.tscn" id="4_cgk28"]
 [ext_resource type="PackedScene" uid="uid://blwrkk68b82bg" path="res://entities/player/knight.tscn" id="6_t6pcv"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3sbdv"]
@@ -644,5 +644,6 @@ position = Vector2(64, 320)
 [node name="Units" type="Node2D" parent="."]
 y_sort_enabled = true
 
-[node name="Knight" parent="Units" instance=ExtResource("6_t6pcv")]
-position = Vector2(440, 191)
+[node name="Knight" parent="Units" groups=["Enemy"] instance=ExtResource("6_t6pcv")]
+position = Vector2(415, 307)
+team = 3

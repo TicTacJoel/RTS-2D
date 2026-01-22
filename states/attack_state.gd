@@ -1,10 +1,11 @@
 extends State
 
-var cooldown_timer := 0.0
+var cooldown_timer: float = 0.0
 
 #------------------------------------------------------------------------------|
 func enter(prev_state: State) -> void:
-	state_owner.play_animation("attack")
+	print("Entered attacking state")
+	#state_owner.play_animation("attack")
 	cooldown_timer = 0.0
 
 #------------------------------------------------------------------------------|
@@ -21,9 +22,8 @@ func update(delta: float) -> void:
 	cooldown_timer -= delta
 	if cooldown_timer <= 0.0:
 		perform_attack()
-		cooldown_timer = state_owner.attack_cooldown
+		cooldown_timer = state_owner.attack_speed
 
 #------------------------------------------------------------------------------|
 func perform_attack() -> void:
-	print("%s attacks %s for %d damage" % [state_owner.name, state_owner.target.name, state_owner.attack_damage])
-	# Apply damage logic here
+	print("%s attacks %s for %d damage" % [state_owner.name, state_owner.target.name, state_owner.damage])

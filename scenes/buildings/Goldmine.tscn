@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://0mo13qfbnj27"]
 
-[ext_resource type="Script" path="res://scenes/buildings/gold_mine.gd" id="1_3xlpc"]
-[ext_resource type="Texture2D" uid="uid://duurmc8t5qdnv" path="res://assets/buildings/Goldmine1.png" id="2_u3j1k"]
+[ext_resource type="Script" path="res://scenes/buildings/Goldmine.gd" id="1_3hqid"]
+[ext_resource type="Texture2D" uid="uid://duurmc8t5qdnv" path="res://assets/buildings/Goldmine1.png" id="2_heubm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a7qux"]
 size = Vector2(27, 16)
@@ -14,11 +14,11 @@ bg_color = Color(0, 0.724298, 0.236324, 1)
 
 [node name="GoldMine" type="StaticBody2D" groups=["building"]]
 y_sort_enabled = true
-script = ExtResource("1_3xlpc")
+script = ExtResource("1_3hqid")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)
-texture = ExtResource("2_u3j1k")
+texture = ExtResource("2_heubm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -8)

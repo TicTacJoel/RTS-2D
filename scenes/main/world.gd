@@ -10,10 +10,12 @@ var build_tile
 var build_location
 var build_type
 # TODO: Change to not fixed value
-var race: String = "human"
+var race: String = "Human"
 
 var current_gold
 var units = []
+var cost_string = "Cost"
+var footprint_string = "Footprint"
 
 #------------------------------------------------------------------------------|
 func _ready() -> void:
@@ -31,13 +33,36 @@ func _process(_delta: float) -> void:
 #------------------------------------------------------------------------------|
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("RightClick") and !build_mode:
-		move_selected_units(get_global_mouse_position())
+		var click_pos = get_global_mouse_position()
+		var clicked_node = get_node_under_cursor(click_pos)
+		
+		#if clicked_node and clicked_node.is_in_group("Enemy"):
+		if clicked_node and clicked_node.team != Types.TEAM.team1:
+			attack_selected_units(clicked_node)
+		else:
+			move_selected_units(click_pos)
 	
 	if event.is_action_released("RightClick") and build_mode == true:
 		cancel_build_mode()
 	if event.is_action_released("LeftClick") and build_mode == true:
 		verify_and_build()
 		cancel_build_mode()
+
+#------------------------------------------------------------------------------|
+func get_node_under_cursor(click_pos: Vector2) -> Node2D:
+	var space_state = get_world_2d().direct_space_state
+	
+	var query := PhysicsPointQueryParameters2D.new()
+	query.position = click_pos
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	
+	var result = space_state.intersect_point(query, 1)
+	if result.size() > 0:
+		var collider = result[0].collider
+		if collider is Node2D:
+			return collider
+	return null
 
 #------------------------------------------------------------------------------|
 func get_units() -> void:
@@ -89,7 +114,16 @@ func move_selected_units(click_pos: Vector2) -> void:
 			(col - formation_size / 2.0) * spacing,
 			(row - formation_size / 2.0) * spacing
 		)
-		selected_units[i].set_target(click_pos + offset)
+		if count > 1:
+			selected_units[i].on_player_move_command(click_pos + offset)
+		else:
+			selected_units[i].on_player_move_command(click_pos)
+
+#------------------------------------------------------------------------------|
+func attack_selected_units(target_node: Node2D) -> void:
+	for unit in units:
+		if unit.selected:
+			unit.on_player_attack_command(target_node)
 
 #------------------------------------------------------------------------------|
 # Building Functions
@@ -112,7 +146,7 @@ func update_building_preview():
 	
 	# Get the building's footprint
 	# TODO: replace fixed "human" with race
-	var building_footprint = BuildingData.building_data[race][build_type]["Footprint"] 
+	var building_footprint = BuildingData.building_data[race][build_type][footprint_string] 
 	
 	# Check if all tiles in the footprint are clear
 	for relative_pos in building_footprint:
@@ -121,7 +155,7 @@ func update_building_preview():
 			build_valid = false
 			break  # Exit the loop as soon as an invalid tile is found
 	
-	if current_gold < BuildingData.building_data[race][build_type]["cost"]:
+	if current_gold < BuildingData.building_data[race][build_type][cost_string]:
 		build_valid = false
 	
 	if build_valid:
@@ -145,11 +179,11 @@ func cancel_build_mode():
 func verify_and_build():
 	var building_exclusion = map_node.get_node("BuildingExclusion")
 	# Get size and footprint of building
-	var building_footprint = BuildingData.building_data[race][build_type]["Footprint"]
+	var building_footprint = BuildingData.building_data[race][build_type][footprint_string]
 	var ground_tilemap = map_node.get_node("Ground")
 	
 	if  build_valid:
-		if current_gold >= BuildingData.building_data[race][build_type]["cost"]:
+		if current_gold >= BuildingData.building_data[race][build_type][cost_string]:
 			var new_tower = load("res://scenes/buildings/" + build_type + ".tscn").instantiate()
 			new_tower.position = build_location
 			new_tower.type = build_type
@@ -163,7 +197,7 @@ func verify_and_build():
 			
 			# Let ground know, it needs to rebake
 			ground_tilemap.notify_runtime_tile_data_update()
-			Global.Gold -= BuildingData.building_data[race][build_type]["cost"]
+			Global.Gold -= BuildingData.building_data[race][build_type][cost_string]
 
 #------------------------------------------------------------------------------|
 func show_building_info():

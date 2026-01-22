@@ -4,6 +4,7 @@ var destination : Vector2 = Vector2.ZERO
 
 #------------------------------------------------------------------------------|
 func enter(prev_state: State) -> void:
+	print("Entered walking state")
 	state_owner.animation_player.play("walk")
 
 #------------------------------------------------------------------------------|
