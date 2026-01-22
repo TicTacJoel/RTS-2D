@@ -34,13 +34,13 @@ func _process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("RightClick") and !build_mode:
 		var click_pos = get_global_mouse_position()
-		var clicked_node = get_node_under_cursor(click_pos)
+		#var clicked_node = get_node_under_cursor(click_pos)
 		
 		#if clicked_node and clicked_node.is_in_group("Enemy"):
-		if clicked_node and clicked_node.team != Types.TEAM.team1:
-			attack_selected_units(clicked_node)
-		else:
-			move_selected_units(click_pos)
+		#if clicked_node and clicked_node.team != Types.TEAM.team1:
+			#attack_selected_units(clicked_node)
+		#else:
+		move_selected_units(click_pos)
 	
 	if event.is_action_released("RightClick") and build_mode == true:
 		cancel_build_mode()
